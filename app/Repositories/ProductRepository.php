@@ -3,10 +3,9 @@
 
 namespace App\Repositories;
 
-use App\Repositories\Contracts\RepositoryInterface;
-use App\Repositories\Repository;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-class ProductRepository extends Repository
+class ProductRepository extends BaseRepository
 {
     /**
      * Specify Model class name
