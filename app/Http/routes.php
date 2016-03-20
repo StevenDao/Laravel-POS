@@ -29,8 +29,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'HomeController@index');
 
-    Route::get('product/new', ['uses' => 'ProductController@newProduct', 'as' => 'product.new']);
-    Route::get('product/edit', ['uses' => 'ProductController@editProduct', 'as' => 'product.edit']);
-    Route::post('product/create', 'ProductController@create');
-    Route::post('product/delete', ['uses' => 'ProductController@delete', 'as' => 'product.delete']);
+//    Route::get('product/new', ['uses' => 'ProductController@newProduct', 'as' => 'product.new']);
+//    Route::get('product/edit/{id}', ['uses' => 'ProductController@editProduct', 'as' => 'product.edit']);
+//    Route::post('product/create', 'ProductController@create');
+//    Route::post('product/delete', ['uses' => 'ProductController@delete', 'as' => 'product.delete']);
+
+    Route::resource('product', 'ProductController');
 });
