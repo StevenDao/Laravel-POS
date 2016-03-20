@@ -4,10 +4,10 @@
     "app.scss"
   ],
   "names": [],
-  "mappings": "AAEA;EACE,gBAAgB,EACjB;;AAED;EACE,mBAAmB,EACpB",
+  "mappings": "AAEA;EACE,gBAAgB,EACjB;;AAED;EACE,mBAAmB,EACpB;;AAED;EACE,aAAa,EACd",
   "file": "app.css",
   "sourcesContent": [
-    "// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n\n.login-container {\n  padding-top: 5%;\n}\n\n.login-heading {\n  text-align: center;\n}"
+    "// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n\n.login-container {\n  padding-top: 5%;\n}\n\n.login-heading {\n  text-align: center;\n}\n\n.panel-buttons {\n  float: right;\n}"
   ],
   "sourceRoot": "/source/"
 }

@@ -1,9 +1,13 @@
 .login-container {
-    padding-top: 5%;
+  padding-top: 5%;
 }
 
 .login-heading {
-    text-align: center;
+  text-align: center;
+}
+
+.panel-buttons {
+  float: right;
 }
 
 /*# sourceMappingURL=app.css.map */
