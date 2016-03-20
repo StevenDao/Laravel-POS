@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "sources": [
+    "app.scss"
+  ],
+  "names": [],
+  "mappings": "AAEA;EACE,gBAAgB,EACjB;;AAED;EACE,mBAAmB,EACpB",
+  "file": "app.css",
+  "sourcesContent": [
+    "// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n\n.login-container {\n  padding-top: 5%;\n}\n\n.login-heading {\n  text-align: center;\n}"
+  ],
+  "sourceRoot": "/source/"
+}
