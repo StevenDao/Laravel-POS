@@ -10,7 +10,7 @@
                     </div>
                     <div class="panel-body">
                         {!! Form::model($dbProduct, array('method' => 'PATCH', 'action' => ['ProductController@update', $dbProduct->id])) !!}
-                        @include('product.details', ['buttonText' => 'Update Product'])
+                        @include('product._details', ['buttonText' => 'Update Product'])
                         {!! Form::close() !!}
                     </div>
                 </div>

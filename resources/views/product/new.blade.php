@@ -10,7 +10,7 @@
                     </div>
                     <div class="panel-body">
                         {!! Form::open(array('method' => 'POST', 'url' => 'product')) !!}
-                        @include('product.details', ['buttonText' => 'Add Product'])
+                        @include('product._details', ['buttonText' => 'Add Product'])
                         {!! Form::close() !!}
                     </div>
                 </div>
