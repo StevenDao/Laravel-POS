@@ -15,10 +15,10 @@ class CreateProductsTable extends Migration
         //
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('name');
             $table->string('img');
             $table->longText('description');
-            $table->double('price', 4, 2);
+            $table->double('price', 5, 2);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('password_resets');
+        Schema::dropIfExists('products');
     }
 }
