@@ -20,7 +20,7 @@
 	</div>
 	<div class="panel-body">
 		<img class="img-responsive"
-		     src="{{$product->img}}"
+		     src="{{'/img/'.$product->img}}"
 		     alt="{{$product->name}}">
 
 		@if ($product->description)

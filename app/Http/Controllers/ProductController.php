@@ -40,10 +40,22 @@ class ProductController extends Controller
 	 */
 	public function store(ProductRequest $request)
 	{
+		// Create DB Record first
 		$form = $request->all();
 		$form['created_at'] = Carbon::now();
 		$form['updated_at'] = Carbon::now();
-		$this->productRepo->create($form);
+		// New Record is returned
+		$newProduct = $this->productRepo->create($form);
+		// If a file was uploaded
+		if ($request->hasFile('img')) {
+			$extension = $request->file('img')->getClientOriginalExtension(); // getting image extension
+			$filename = $newProduct->id . '.' . $extension;
+			$file = $request->file('img');
+			$file->move(public_path() . '/img/', $filename);
+			// Update record with new image name
+			$form['img'] = $filename;
+			$newProduct->update($form);
+		}
 
 		return redirect('/');
 	}
@@ -67,7 +79,15 @@ class ProductController extends Controller
 	 */
 	public function update($id, ProductRequest $request)
 	{
+		if ($request->hasFile('img')) {
+			$extension = $request->file('img')->getClientOriginalExtension(); // getting image extension
+			$filename = $id . '.' . $extension;
+			$file = $request->file('img');
+			$file->move(public_path() . '/img/', $filename);
+		}
+
 		$form = $request->all();
+		$form['img'] = $filename;
 		$form['updated_at'] = Carbon::now();
 		$dbProduct = $this->productRepo->update($form, $id);
 

@@ -9,7 +9,10 @@
                         Product Details
                     </div>
                     <div class="panel-body">
-                        {!! Form::model($dbProduct, array('method' => 'PATCH', 'action' => ['ProductController@update', $dbProduct->id])) !!}
+                        {!! Form::model($dbProduct, array('method' => 'PATCH',
+                                        'action' => ['ProductController@update',
+                                                     $dbProduct->id],
+                                        'files' => true)) !!}
                         @include('product._details', ['buttonText' => 'Update Product'])
                         {!! Form::close() !!}
                     </div>

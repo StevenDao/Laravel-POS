@@ -9,7 +9,9 @@
                         Product Details
                     </div>
                     <div class="panel-body">
-                        {!! Form::open(array('method' => 'POST', 'url' => 'product')) !!}
+                        {!! Form::open(array('method' => 'POST',
+                                             'url' => 'product',
+                                             'files' => true)) !!}
                         @include('product._details', ['buttonText' => 'Add Product'])
                         {!! Form::close() !!}
                     </div>
