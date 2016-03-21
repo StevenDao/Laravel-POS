@@ -21,9 +21,15 @@
 										<b>{{array_get($data, 'product.name')}}</b>
 									</div>
 									<div class="panel-body">
-										<img class="img-responsive"
-										     src="{{array_get($data, 'product.img')}}"
-										     alt="{{array_get($data, 'product.name')}}">
+										@if (!empty($message))
+											<img class="img-responsive"
+											     src="{{$message->embed(public_path().'/img/'.array_get($data, 'product.img'))}}"
+											     alt="{{array_get($data, 'product.name')}}">
+										@else
+											<img class="img-responsive"
+											     src="{{'/img/'.array_get($data, 'product.img')}}"
+											     alt="{{array_get($data, 'product.name')}}">
+										@endif
 										@if (array_get($data, 'product.description'))
 											<p>
 												<b>Product Description:</b>

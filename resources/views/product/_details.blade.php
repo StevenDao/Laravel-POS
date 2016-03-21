@@ -1,5 +1,10 @@
 <div class="form-group {{ $errors->has('img') ? 'has-error' : '' }}">
     {!! Form::label('img', 'Product Image:') !!}
+    @if ($dbProduct)
+        <img class="img-responsive"
+             src="{{'/img/'.$dbProduct->img}}"
+             alt="{{$dbProduct->name}}">
+    @endif
     {!! Form::file('img') !!}
     @if ($errors->has('img'))
         <span class="help-block">

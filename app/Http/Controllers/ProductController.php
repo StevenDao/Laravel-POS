@@ -79,15 +79,16 @@ class ProductController extends Controller
 	 */
 	public function update($id, ProductRequest $request)
 	{
+		$form = $request->all();
+
 		if ($request->hasFile('img')) {
 			$extension = $request->file('img')->getClientOriginalExtension(); // getting image extension
 			$filename = $id . '.' . $extension;
 			$file = $request->file('img');
 			$file->move(public_path() . '/img/', $filename);
+			$form['img'] = $filename;
 		}
 
-		$form = $request->all();
-		$form['img'] = $filename;
 		$form['updated_at'] = Carbon::now();
 		$dbProduct = $this->productRepo->update($form, $id);
 
