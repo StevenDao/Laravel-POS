@@ -4,10 +4,10 @@
     "app.scss"
   ],
   "names": [],
-  "mappings": "AAEA;EACE,gBAAgB,EACjB;;AAED;EACE,mBAAmB,EACpB;;AAED;EACE,aAAa,EACd;;AAED;EACE,YAAY;EACZ,mBAAmB;EACnB,mBAAmB,EACpB",
+  "mappings": "AAEA;EACE,gBAAgB,EACjB;;AAED;EACE,mBAAmB,EACpB;;AAED;EACE,aAAa,EACd;;AAED;EACE,YAAY;EACZ,mBAAmB;EACnB,mBAAmB,EACpB;;AAED;EACE,gBAAgB,EACjB",
   "file": "app.css",
   "sourcesContent": [
-    "// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n\n.login-container {\n  padding-top: 5%;\n}\n\n.login-heading {\n  text-align: center;\n}\n\n.panel-buttons {\n  float: right;\n}\n\n.list-price {\n  float: left;\n  margin-top: 0.55em;\n  margin-bottom: 0em;\n}"
+    "// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n\n.login-container {\n  padding-top: 5%;\n}\n\n.login-heading {\n  text-align: center;\n}\n\n.panel-buttons {\n  float: right;\n}\n\n.list-price {\n  float: left;\n  margin-top: 0.55em;\n  margin-bottom: 0em;\n}\n\n.delete-form {\n  display: inline;\n}"
   ],
   "sourceRoot": "/source/"
 }

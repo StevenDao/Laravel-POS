@@ -6,9 +6,15 @@
                 <a href="{{ URL::route('product.edit', array('id' => $product->id)) }}">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </a>
-                <a href="{{ URL::route('product.destroy', array('id' => $product->id)) }}">
+                {!! Form::open(array(
+                'method' => 'DELETE',
+                'action' => ['ProductController@destroy', $product->id],
+                'class' => 'delete-form'))!!}
+                <a onclick="deleteProduct($(this));">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </a>
+                {!! Form::close() !!}
+
             </div>
         @endif
     </div>
@@ -33,3 +39,8 @@
         </div>
     </div>
 </div>
+
+
+@section('footer')
+    <script src="js/deleteProduct.js"></script>
+@endsection
