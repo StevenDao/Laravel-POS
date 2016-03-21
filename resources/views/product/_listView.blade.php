@@ -10,7 +10,7 @@
 				'method' => 'DELETE',
 				'action' => ['ProductController@destroy', $product->id],
 				'class' => 'delete-form'))!!}
-				<a onclick="deleteProduct($(this));">
+				<a onclick="buttonSubmit($(this), 'delete');">
 					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 				</a>
 				{!! Form::close() !!}
@@ -52,7 +52,8 @@
 			<b>Price: </b>${{ number_format($product->price, 2) }}
 		</p>
 		<div class="panel-buttons">
-			{!! Form::submit('Purchase', array('class' => 'btn btn-success')) !!}
+			{{--{!! Form::submit('Purchase', array('class' => 'btn btn-success')) !!}--}}
+			<button onclick="buttonSubmit($(this), 'purchase');" type="button" class="btn btn-success">Purchase</button>
 		</div>
 		{!! Form::close() !!}
 	</div>
@@ -60,5 +61,5 @@
 
 
 @section('footer')
-	<script src="js/deleteProduct.js"></script>
+	<script src="js/buttonSubmit.js"></script>
 @endsection

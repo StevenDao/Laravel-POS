@@ -1,6 +1,6 @@
 <div class="form-group {{ $errors->has('img') ? 'has-error' : '' }}">
     {!! Form::label('img', 'Product Image:') !!}
-    @if ($dbProduct)
+    @if (!empty($dbProduct))
         <img class="img-responsive"
              src="{{'/img/'.$dbProduct->img}}"
              alt="{{$dbProduct->name}}">
