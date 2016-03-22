@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
-use Mail;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Jobs\SendPurchaseEmail;
+//use App\Jobs\SendPurchaseEmail;
+use App\Events\PurchaseEmailEvent;
 use App\Repositories\ColourRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\SizeRepository;
@@ -44,7 +45,8 @@ class PurchaseController extends Controller
 		$size = $this->sizeRepo->find($request->get('sizeId'));;
 		$colour = $this->colourRepo->find($request->get('colourId'));
 		// Push email to the queue :)
-		$this->dispatch(new SendPurchaseEmail($this->user, $purchased, $size, $colour));
+		Event::fire(new PurchaseEmailEvent($this->user, $purchased, $size, $colour));
+//		$this->dispatch(new SendPurchaseEmail($this->user, $purchased, $size, $colour));
 		$data = array('product' => $purchased,
 		              'size'    => $size,
 		              'colour'  => $colour);

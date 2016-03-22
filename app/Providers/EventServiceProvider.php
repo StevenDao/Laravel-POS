@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\PurchaseEmailEvent;
+use App\Listeners\SendPurchaseEmail;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -13,9 +15,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
+        'App\Events\SomeEvent'    => [
             'App\Listeners\EventListener',
         ],
+        PurchaseEmailEvent::class => [
+            SendPurchaseEmail::class
+        ]
     ];
 
     /**
