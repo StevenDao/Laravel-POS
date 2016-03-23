@@ -1,3 +1,19 @@
+# Laravel-SimpleStore
+For the purpose of this project, I am assuming initial Larvel Homestead setup is complete and configured.
+
+Checkout my repo and do the following:
+- Configre Homestead to point to the directory you checked-out my project
+- Startup the server (vagrant up)
+- Ssh into vegrant (vagrant ssh)
+- Run the Migrations (php artisan migrate)
+- On you browser, go to your configure link
+- Have Fun! Enjoy!
+
+## Admin Privileges
+- Newly Registered Users will have Type='U'
+- To enable admin, Go to the Database and change you User Record type to 'A'
+- Admin Functions will now be visible (Feel the Power!)
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
