@@ -74,7 +74,7 @@ class ProductTest extends TestCase
 		$img = $this->faker->image('/tmp', 640, 480);
 		$name = $this->faker->name;
 		$description = $this->faker->realText(4048, 2);
-		$price = $this->faker->randomFloat(2, 0, 999.99);
+		$price = $this->faker->randomFloat(2, 0, 9999999.99);
 		$this->attach($img, 'img')
 		     ->type($name, 'name')
 		     ->type($description, 'description')
@@ -89,6 +89,30 @@ class ProductTest extends TestCase
 		$this->assertEquals($dbProduct->name, $name);
 		$this->assertEquals($dbProduct->description, $description);
 		$this->assertEquals($dbProduct->price, $price);
+	}
+
+	/**
+	 * Test Add New Product
+	 * Through the application
+	 *
+	 * @return void
+	 */
+	public function testAdminAddProductSimpleValidation()
+	{
+		$this->be($this->admin);
+		$this->visit('/product/create')
+		     ->see('Add New Product')
+		     ->see('Product Image:')
+		     ->see('Product Name:')
+		     ->see('Product Description:')
+		     ->see('Product Price:');
+		
+		$this->press('Add Product')
+		     ->seePageIs('/product/create')
+		     ->see('Add New Product')
+		     ->see('The img field is required.')
+		     ->see('The name field is required.')
+		     ->see('The price field is required.');
 	}
 
 	/**
@@ -116,7 +140,7 @@ class ProductTest extends TestCase
 		$img = $this->faker->image('/tmp', 640, 480);
 		$name = $this->faker->name;
 		$description = $this->faker->realText(4048, 2);
-		$price = $this->faker->randomFloat(2, 0, 999.99);
+		$price = $this->faker->randomFloat(2, 0, 9999999.99);
 		$this->attach($img, 'img')
 		     ->type($name, 'name')
 		     ->type($description, 'description')

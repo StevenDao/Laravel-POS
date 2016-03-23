@@ -24,10 +24,10 @@ class ProductRequest extends Request
     public function rules()
     {
         return [
-            'img' => 'image',
-            'name' => 'required|min:3|max:255',
+            'img'         => 'required|image',
+            'name'        => 'required|min:3|max:255',
             'description' => 'max:4048',
-            'price' => 'required|numeric|between:0,999.99'
+            'price'       => 'required|numeric|between:0,9999999.99'
         ];
     }
 }
