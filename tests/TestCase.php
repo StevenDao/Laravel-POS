@@ -1,4 +1,5 @@
 <?php
+use App\Models\User;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
@@ -9,11 +10,15 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 	 */
 	protected $baseUrl = 'http://localhost';
 	protected $faker;
+	protected $user;
+	protected $admin;
 
 	public function setUp()
 	{
 		parent::setUp();
 		$this->faker = Faker\Factory::create();
+		$this->user = new User(array('name' => 'Test'));
+		$this->admin = new User(array('name' => 'Admin', 'type' => 'A'));
 	}
 
 	/**

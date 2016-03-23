@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-//use App\Jobs\SendPurchaseEmail;
 use App\Events\PurchaseEmailEvent;
 use App\Repositories\ColourRepository;
 use App\Repositories\ProductRepository;
@@ -46,7 +45,6 @@ class PurchaseController extends Controller
 		$colour = $this->colourRepo->find($request->get('colourId'));
 		// Push email to the queue :)
 		Event::fire(new PurchaseEmailEvent($this->user, $purchased, $size, $colour));
-//		$this->dispatch(new SendPurchaseEmail($this->user, $purchased, $size, $colour));
 		$data = array('product' => $purchased,
 		              'size'    => $size,
 		              'colour'  => $colour);
