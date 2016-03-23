@@ -2,7 +2,7 @@
 For the purpose of this project, I am assuming initial Larvel Homestead setup is complete and configured.
 
 Checkout my repo and do the following:
-- Configre Homestead to point to the directory you checked-out my project
+- Configure Homestead to point to the directory you checked-out my project
 - Startup the server (vagrant up)
 - Ssh into vegrant (vagrant ssh)
 - Run the Migrations (php artisan migrate)
