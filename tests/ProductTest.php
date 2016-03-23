@@ -125,9 +125,9 @@ class ProductTest extends TestCase
 		     ->seePageIs('/');
 
 		// Retrieve the edited product
-		$dbProduct = Products::all()->where('id', $newProduct->id);
+		$dbProduct = Products::all()->where('id', $newProduct->id)->first();
 		$this->assertNotNull($dbProduct);
-		$this->assertEquals($dbProduct->img, $dbProduct->id . '.jpg');
+		$this->assertEquals($dbProduct->img, $newProduct->id . '.jpg');
 		$this->assertEquals($dbProduct->name, $name);
 		$this->assertEquals($dbProduct->description, $description);
 		$this->assertEquals($dbProduct->price, $price);

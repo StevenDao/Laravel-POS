@@ -18,7 +18,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 	{
 		parent::setUp();
 		$this->faker = Faker\Factory::create();
-		$this->user = new User(array('name' => 'Test'));
+		$this->user = new User(array('name' => 'Test', 'email' => 'test@test.com'));
 		$this->admin = new User(array('name' => 'Admin', 'type' => 'A'));
 	}
 
