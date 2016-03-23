@@ -1,14 +1,22 @@
 <?php
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Crypt;
 
 class LoginTest extends TestCase
 {
+	use DatabaseTransactions;
+
 	public function setUp()
 	{
 		// This method will automatically be called prior to any of your test cases
 		parent::setUp();
+		User::create(array('name'     => 'Admin',
+		                   'email'    => 'admin@test.com',
+		                   'password' => bcrypt('admin123'),
+		                   'type'     => 'A'));
 	}
 
 	/**
