@@ -15,18 +15,12 @@ class PurchaseTest extends TestCase
 	{
 		// This method will automatically be called prior to any of your test cases
 		parent::setUp();
-		$img = $this->faker->image($dir = '/tmp', $width = 640, $height = 480);
-		$name = $this->faker->name;
-		$description = $this->faker->realText($maxNbChars = 4048, $indexSize = 2);
-		$price = $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 999.99);
-		Products::create(['img'         => $img,
-		                  'name'        => $name,
-		                  'description' => $description,
-		                  'price'       => $price,]);
+		// Create a new product in db for testing
+		$this->createDbProduct();
 	}
 
 	/**
-	 * A basic test example.
+	 * Test Application for purchasing the first item
 	 *
 	 * @return void
 	 */
@@ -41,6 +35,11 @@ class PurchaseTest extends TestCase
 		     ->see('Your Purchase');
 	}
 
+	/**
+	 * Test purchase POST
+	 *
+	 * @return void
+	 */
 	public function testPurchasePost()
 	{
 		$this->expectsEvents(PurchaseEmailEvent::class);

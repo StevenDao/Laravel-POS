@@ -1,6 +1,5 @@
 <?php
 use App\Models\Products;
-use App\Repositories\ProductRepository;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -13,10 +12,14 @@ class ProductTest extends TestCase
 	{
 		// This method will automatically be called prior to any of your test cases
 		parent::setUp();
+		// Create a new product in db for testing
+		$this->createDbProduct();
 	}
 
 	/**
-	 * A basic test example.
+	 * Test Security
+	 * Users should not be able to see the
+	 * Add, Edit and Delete Icons
 	 *
 	 * @return void
 	 */
@@ -29,17 +32,34 @@ class ProductTest extends TestCase
 		$this->dontSeeElement('span', array('class' => 'glyphicon glyphicon-pencil'));
 		$this->dontSeeElement('span', array('class' => 'glyphicon glyphicon-trash'));
 		$response = $this->action('GET', 'HomeController@index');
-		$response->original->getData();
+		$this->assertNotEmpty($response->original->getData());
 	}
 
+	/**
+	 * Test Security
+	 * Admin should  be able to see the
+	 * Add, Edit and Delete Icons
+	 *
+	 * @return void
+	 */
 	public function testAdminProductList()
 	{
 		$this->be($this->admin);
 		$this->visit('/')
 		     ->see('Product List');
 		$this->seeElement('span', array('class' => 'glyphicon glyphicon-plus'));
+		$this->seeElement('span', array('class' => 'glyphicon glyphicon-pencil'));
+		$this->seeElement('span', array('class' => 'glyphicon glyphicon-trash'));
+		$response = $this->action('GET', 'HomeController@index');
+		$this->assertNotEmpty($response->original->getData());
 	}
 
+	/**
+	 * Test Add New Product
+	 * Through the application
+	 *
+	 * @return void
+	 */
 	public function testAdminAddProduct()
 	{
 		$this->be($this->admin);
@@ -71,8 +91,11 @@ class ProductTest extends TestCase
 		$this->assertEquals($dbProduct->price, $price);
 	}
 
-	/*
-	 * This is repetitive... How can I fix this?
+	/**
+	 * Test Edit Product
+	 * Through the application
+	 *
+	 * @return void
 	 */
 	public function testAdminEditProduct()
 	{
@@ -80,19 +103,9 @@ class ProductTest extends TestCase
 		$this->visit('/product/create');
 
 		// Setup for new Product
-		$img = $this->faker->image('/tmp', 640, 480);
-		$name = $this->faker->name;
-		$description = $this->faker->realText(4048, 2);
-		$price = $this->faker->randomFloat(2, 0, 999.99);
-		$this->attach($img, 'img')
-		     ->type($name, 'name')
-		     ->type($description, 'description')
-		     ->type($price, 'price')
-		     ->press('Add Product')
-		     ->seePageIs('/');
+		$newProduct = $this->createDbProduct();
 
-		$dbProduct = Products::all()->last();
-		$this->visit('/product/' . $dbProduct->id . '/edit')
+		$this->visit('/product/' . $newProduct->id . '/edit')
 		     ->see('Edit Product')
 		     ->see('Product Image:')
 		     ->see('Product Name:')
@@ -111,8 +124,8 @@ class ProductTest extends TestCase
 		     ->press('Update Product')
 		     ->seePageIs('/');
 
-		// Newest entry is the last item in DB
-		$dbProduct = Products::all()->last();
+		// Retrieve the edited product
+		$dbProduct = Products::all()->where('id', $newProduct->id);
 		$this->assertNotNull($dbProduct);
 		$this->assertEquals($dbProduct->img, $dbProduct->id . '.jpg');
 		$this->assertEquals($dbProduct->name, $name);
@@ -120,34 +133,25 @@ class ProductTest extends TestCase
 		$this->assertEquals($dbProduct->price, $price);
 	}
 
+	/**
+	 * Test Delete Product
+	 * Through the application
+	 *
+	 * @return void
+	 */
 	public function testAdminDeleteProduct()
 	{
 		$this->be($this->admin);
 		$this->visit('/product/create');
 
 		// Setup for new Product
-		$img = $this->faker->image('/tmp', 640, 480);
-		$name = $this->faker->name;
-		$description = $this->faker->realText(4048, 2);
-		$price = $this->faker->randomFloat(2, 0, 999.99);
-		$this->attach($img, 'img')
-		     ->type($name, 'name')
-		     ->type($description, 'description')
-		     ->type($price, 'price')
-		     ->press('Add Product')
-		     ->seePageIs('/');
+		$newProduct = $this->createDbProduct();
 
-		// Newest entry is the last item in DB
-		$dbProduct = Products::all()->last();
+		// Delete Item
+		$this->delete($this->baseUrl . '/product/' . $newProduct->id);
 
-		// save product before deletion
-		$oldProduct = $dbProduct;
-		$this->delete($this->baseUrl . '/product/' . $dbProduct->id);
-
-		// Get last Entry from db
-		$dbProduct = Products::all()->last();
-		// If deleted ids should not be equal
-		$this->assertTrue((is_null($dbProduct) || $dbProduct->id != $oldProduct->id),
-			'Product was not Delete Properly!');
+		// Attempt to find Delete product
+		$dbProduct = Products::all()->where('id', $newProduct->id);
+		$this->assertEmpty($dbProduct);
 	}
 }

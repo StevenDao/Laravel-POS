@@ -1,5 +1,6 @@
 <?php
 use App\Models\User;
+use App\Models\Products;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
@@ -32,5 +33,23 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 		$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
 		return $app;
+	}
+
+	/**
+	 * Creates new product in db.
+	 *
+	 * @return NewProductModel
+	 */
+	public function createDbProduct()
+	{
+		$img = $this->faker->image($dir = '/tmp', $width = 640, $height = 480);
+		$name = $this->faker->name;
+		$description = $this->faker->realText($maxNbChars = 4048, $indexSize = 2);
+		$price = $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 999.99);
+
+		return Products::create(['img'         => $img,
+		                         'name'        => $name,
+		                         'description' => $description,
+		                         'price'       => $price,]);
 	}
 }
