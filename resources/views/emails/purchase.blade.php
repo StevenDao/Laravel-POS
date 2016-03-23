@@ -13,7 +13,7 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								Your Purchase
+								<b> Your Purchase </b>
 							</div>
 							<div class="panel-body">
 								<div class="panel panel-default">
